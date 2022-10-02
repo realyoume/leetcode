@@ -1,8 +1,7 @@
 package main
 
 func main() {
-	arr := []int{100, 4, 200, 1, 3, 2}
-	longestConsecutive(arr)
+
 }
 
 //func longestConsecutive(nums []int) int {
