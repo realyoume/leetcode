@@ -40,8 +40,6 @@ class Solution {
             return;
         }
 
-
-
         int n = s.length();
         for (int i = start; i < n; ++i) {
             if (i != start && s.charAt(i) == s.charAt(i-1)){
