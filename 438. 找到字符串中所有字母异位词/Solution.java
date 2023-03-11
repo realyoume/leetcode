@@ -1,61 +1,54 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-class Solution {
+public class ListNode {
+    int val;
+    ListNode next;
 
-    public static void main(String[] args) {
-        findAnagrams("cbaebabacd"
-               , "abc");
+    ListNode() {
     }
 
-    public static List<Integer> findAnagrams(String s, String p) {
-        int m = s.length(),n = p .length();
+    ListNode(int val) {
+        this.val = val;
+    }
 
-        if(m < n){
-            return new ArrayList<Integer>();
-        }
+    ListNode(int val, ListNode next) {
+        this.val = val;
+        this.next = next;
+    }
+}
 
-        int[] counter = new int[26];
-        List<Integer> ans = new ArrayList<>();
-        for(int i = 0; i < n; i++){
-           counter[p.charAt(i) - 'a']--;
-           counter[s.charAt(i) - 'a']++;
-        }
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode temp = null;
+        ListNode dummy = new ListNode(0, temp);
 
-        int diff = 0;
+        int carry = 0;
+        while (l1 != null || l2 != null){
+            int val1 = l1 == null ? 0 : l1.val;
+            int val2 = l2 == null ? 0 : l2.val;
 
-        for (int i = 0; i < 26; ++i) {
-            if (counter[i] != 0){
-                diff++;
+            int sum = val1 + val2 + carry;
+
+            if (temp = null){
+                temp = new ListNode(sum % 10 );
+            }else {
+                temp .next = new ListNode(sum % 10 );
+                temp = temp.next;
+            }
+
+            carry = sum / 10;
+
+            if (l1 != null){
+                l1 = l1.next;
+            }
+            if (l2 != null){
+                l2 = l2.next;
             }
         }
 
-        if (diff == 0){
-            ans.add(0);
+        if (carry != 0){
+            temp.next = new ListNode(carry);
         }
 
-        for (int i = 0; i + n < m; ++i) {
-            if (counter[s.charAt(i)-'a'] == 1){
-                diff--;
-            } else if (counter[s.charAt(i) - 'a'] == 0) {
-                diff++;
-            }
-            counter[s.charAt(i)-'a']--;
-
-            if (counter[s.charAt(i+n)-'a'] == -1){
-                diff--;
-            } else if (counter[s.charAt(i+n) - 'a'] == 0) {
-                diff++;
-            }
-            counter[s.charAt(i+n)-'a']++;
-
-            if (diff == 0){
-                ans.add(i+1);
-            }
-        }
-
-        return ans;
+        return dummy.next;
     }
 }
