@@ -1,21 +1,40 @@
-class Solution {
-    public int findUnsortedSubarray(int[] nums) {
-        int n = nums.length;
-        int maxn = Integer.MIN_VALUE, right = -1;
-        int minn = Integer.MAX_VALUE, left = -1;
-        for (int i = 0; i < n; i++) {
-            if (maxn > nums[i]) {
-                right = i;
-            } else {
-                maxn = nums[i];
-            }
-            if (minn < nums[n - i - 1]) {
-                left = n - i - 1;
-            } else {
-                minn = nums[n - i - 1];
-            }
-        }
-        return right == -1 ? 0 : right - left + 1;
+
+public class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode() {
+    }
+
+    ListNode(int val) {
+        this.val = val;
+    }
+
+    ListNode(int val, ListNode next) {
+        this.val = val;
+        this.next = next;
     }
 }
 
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dummy = new ListNode(-1, head);
+
+        int sum = 0;
+
+        ListNode fast = dummy,slow = dummy;
+
+        for (int i = 0; i <= n; ++i) {
+            fast = fast.next;
+        }
+
+        while(fast != null){
+            fast = fast.next;
+            slow = slow.next;
+        }
+
+        slow.next = slow.next.next;
+
+        return dummy.next;
+    }
+}
